@@ -1,4 +1,4 @@
-# Web.de Access â€” Current Status
+# Web.de Access — Current Status
 
 _Last verified: 2026-09-09_
 
