@@ -25,6 +25,7 @@ test("MCP handshake reports the packaged version without accessing a mailbox", {
 test("Kimi manifest pins the dev profile and contains no secrets", () => {
   const manifest = JSON.parse(fs.readFileSync("kimi.plugin.json", "utf8"));
   assert.equal(manifest.mcpServers["webde-access"].env.WEBDE_ACCESS_PROFILE, "dev");
+  assert.deepEqual(manifest.mcpServers["webde-access"].args, ["./scripts/start-mcp.mjs"]);
   assert.doesNotMatch(JSON.stringify(manifest), /WEBDE_(?:APP_)?PASSWORD/);
 });
 

@@ -1,6 +1,6 @@
 {
   "name": "webde-access",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "private": true,
   "type": "module",
   "description": "Private local MCP server for full Web.de mailbox access.",
@@ -18,7 +18,8 @@
     "auth:cleanup-env": "node ./scripts/webde-auth.mjs cleanup-env",
     "security:scan": "node ./scripts/security-scan.mjs",
     "smoke": "node ./scripts/smoke-test.mjs",
-    "e2e:email": "node ./scripts/e2e-email.mjs"
+    "e2e:email": "node ./scripts/e2e-email.mjs",
+    "test:cold-start": "node ./scripts/test-cold-start.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
@@ -34,5 +35,8 @@
     "fast-uri": "3.1.7",
     "hono": "4.13.7",
     "ip-address": "10.4.0"
+  },
+  "allowScripts": {
+    "keytar@7.9.0": true
   }
 }

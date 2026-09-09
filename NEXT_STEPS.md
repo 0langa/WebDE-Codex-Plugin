@@ -1,4 +1,4 @@
-# Web.de Access — Current Status
+# Web.de Access â€” Current Status
 
 _Last verified: 2026-09-09_
 
@@ -6,9 +6,10 @@ _Last verified: 2026-09-09_
 
 - Version 0.2.9: the MCP handshake now reads the package version instead of reporting a stale hardcoded value.
 - Version 0.2.9: refreshed the mail-library dependencies and vulnerable URI/HTTP dependency pins after the production audit reported eight advisories. Direct dependency major versions are unchanged. Offline MIME composition/parsing passes, and the fresh production audit reports zero vulnerabilities.
-- The source release is `v0.2.9`.
+- Version 0.2.10: every provider uses the dependency bootstrap, including fresh Kimi managed installs. The package approves only the locked `keytar@7.9.0` native install script for npm's allowlist policy.
+- The source release is `v0.2.10`.
 - `package.json`, `package-lock.json`, and the three provider manifests use
-  version `0.2.9`.
+  version `0.2.10`.
 - The lockfile uses `@modelcontextprotocol/sdk` `^1.30.0` and scoped overrides
   for its vulnerable transitive packages. A fresh production audit reports zero
   vulnerabilities.
@@ -21,6 +22,7 @@ _Last verified: 2026-09-09_
 | Command | Verifies |
 | --- | --- |
 | `npm run check` | MCP server syntax |
+| `npm run test:cold-start` | Fresh Kimi entrypoint installs dependencies, loads native keytar, and completes MCP initialization/tool discovery without mailbox access |
 | `npm test` | 15 offline security, configuration, manifest, MCP-handshake, mail-library, and public-safety tests |
 | `npm run security:scan` | No legacy credential files or unexpected secret references |
 | `npm audit --omit=dev --audit-level=high` | Production dependency advisory gate |
@@ -34,7 +36,7 @@ not execute live mailbox operations.
 - `npm run smoke` uses stored credentials and touches a real mailbox; run it
   only with an authorized profile.
 - `npm run e2e:email` sends a real message. It is excluded from CI and normal
-  source maintenance.
+  source maintenance. CI also verifies a fresh dependency bootstrap with npm 12.0.2.
 - Keep provider manifests and their shared skill path in sync; tests enforce the
   current layout and secret-free public files.
 

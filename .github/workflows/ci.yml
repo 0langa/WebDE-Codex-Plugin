@@ -16,9 +16,12 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - name: Use the npm install-script allowlist policy
+        run: npm install --global npm@12.0.2
       # The Node tests and security scan do not require native keytar bindings.
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm test
+      - run: npm run test:cold-start
       - run: npm run security:scan
       - run: npm audit --omit=dev --audit-level=high

@@ -123,7 +123,7 @@ users who maintain a local Codex plugin marketplace.
 
 The repository is also an installable Claude Code plugin bundle through `.claude-plugin/plugin.json`
 and `.claude-plugin/marketplace.json`, the same pattern as the Codex plugin bundle above. Complete
-steps 1–4 above (WEB.DE setup, `npm ci`, profile login/import, `npm run smoke`), then:
+steps 1â€“4 above (WEB.DE setup, `npm ci`, profile login/import, `npm run smoke`), then:
 
 ```text
 claude plugin marketplace add <path-to-Web.de-Access>
@@ -136,7 +136,7 @@ plus explicit confirm-before-send/delete guidance matching Claude Code's action-
 
 There is deliberately **one** skill directory. Claude Code auto-discovers `skills/` at the plugin root
 in addition to whatever the manifest declares, so a second provider-specific skill directory would
-register the same skill twice — doubling its always-on token cost and leaving two copies in the picker
+register the same skill twice â€” doubling its always-on token cost and leaving two copies in the picker
 whose instructions can drift apart. All three providers point at `./skills/`.
 
 Claude Code launches plugin MCP servers with the *session* working directory rather than the plugin
@@ -241,3 +241,7 @@ npm run security:scan
 ```
 
 Do not run `npm run e2e:email` in CI without a dedicated test account and secret isolation.
+
+### Fresh-install verification
+
+All provider entrypoints bootstrap the locked dependencies. The package approves only `keytar@7.9.0` for its required native install script under npm 12's install-script policy. `npm run test:cold-start` verifies a fresh Kimi entrypoint, the native binary, and MCP tool discovery without accessing a mailbox.
