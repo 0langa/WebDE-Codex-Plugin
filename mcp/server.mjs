@@ -17,10 +17,11 @@ import { loadRuntimeConfig } from "./auth-config.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const pluginRoot = path.resolve(__dirname, "..");
+const { version } = JSON.parse(fs.readFileSync(path.join(pluginRoot, "package.json"), "utf8"));
 
 const server = new McpServer({
   name: "webde-access",
-  version: "0.2.1",
+  version,
   instructions:
     "Use this server for private WEB.DE mailbox access via IMAP and SMTP: list folders, search/read mail, manage messages, create drafts, send, reply, forward, and save attachments.",
 });

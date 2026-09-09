@@ -1,13 +1,14 @@
 # Web.de Access — Current Status
 
-_Last verified: 2026-08-05_
+_Last verified: 2026-09-09_
 
 ## Current source state
 
-- The latest released source tag is `v0.2.8`. Check local and remote branch
-  heads live before release work.
+- Version 0.2.9: the MCP handshake now reads the package version instead of reporting a stale hardcoded value.
+- Version 0.2.9: refreshed the mail-library dependencies and vulnerable URI/HTTP dependency pins after the production audit reported eight advisories. Direct dependency major versions are unchanged. Offline MIME composition/parsing passes, and the fresh production audit reports zero vulnerabilities.
+- The source release is `v0.2.9`.
 - `package.json`, `package-lock.json`, and the three provider manifests use
-  version `0.2.8`.
+  version `0.2.9`.
 - The lockfile uses `@modelcontextprotocol/sdk` `^1.30.0` and scoped overrides
   for its vulnerable transitive packages. A fresh production audit reports zero
   vulnerabilities.
@@ -20,7 +21,7 @@ _Last verified: 2026-08-05_
 | Command | Verifies |
 | --- | --- |
 | `npm run check` | MCP server syntax |
-| `npm test` | 13 offline security, configuration, manifest, and public-safety tests |
+| `npm test` | 15 offline security, configuration, manifest, MCP-handshake, mail-library, and public-safety tests |
 | `npm run security:scan` | No legacy credential files or unexpected secret references |
 | `npm audit --omit=dev --audit-level=high` | Production dependency advisory gate |
 

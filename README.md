@@ -8,7 +8,7 @@ mailboxes. Credentials stay on the local machine and are never sent to a third-p
 
 - A WEB.DE account with IMAP access enabled
 - An application-specific WEB.DE password when required by the account
-- Node.js 20 or newer
+- Node.js 20.19 or newer
 - Codex CLI or Codex desktop
 - Git
 

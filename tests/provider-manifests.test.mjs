@@ -1,6 +1,26 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+
+test("MCP handshake reports the packaged version without accessing a mailbox", { timeout: 15000 }, async () => {
+  const { version } = JSON.parse(fs.readFileSync("package.json", "utf8"));
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: ["./mcp/server.mjs"],
+    cwd: process.cwd(),
+    stderr: "pipe",
+  });
+  const client = new Client({ name: "webde-version-test", version: "1.0.0" });
+  try {
+    await client.connect(transport);
+    assert.equal(client.getServerVersion()?.version, version);
+    assert.equal(client.getServerVersion()?.name, "webde-access");
+  } finally {
+    await client.close();
+  }
+});
 
 test("Kimi manifest pins the dev profile and contains no secrets", () => {
   const manifest = JSON.parse(fs.readFileSync("kimi.plugin.json", "utf8"));
